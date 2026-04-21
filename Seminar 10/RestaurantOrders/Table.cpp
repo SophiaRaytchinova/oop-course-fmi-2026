@@ -29,14 +29,9 @@ void Table::addOrder(const std::shared_ptr<Order>& order)
 
 void Table::cleanupExpiredOrders()
 {
-    orders.erase(
-        std::remove_if(orders.begin(), orders.end(),
-            [](const std::weak_ptr<Order>& weakOrder)
-            {
-                return weakOrder.expired();
-            }),
-        orders.end()
-    );
+    std::erase_if(orders,[](const std::weak_ptr<Order>& weakOrder){
+        return weakOrder.expired();
+    });
 }
 
 double Table::getBill() const
@@ -52,11 +47,22 @@ double Table::getBill() const
 
             return sum + order->getTotal();
         });
+
+    // alternatively:
+    /*
+    double total = 0.0;
+    for (int i = 0; i < orders.size(); i++) {
+        auto order = orders.at(i).lock();
+        if (order) {
+            total += order->getTotal();
+        }
+    }
+    return total;
+    */
 }
 
-std::size_t Table::getActiveOrdersCount() const
+size_t Table::getActiveOrdersCount() const
 {
-
     return std::count_if(orders.begin(), orders.end(),
             [](const std::weak_ptr<Order>& weakOrder)
             {

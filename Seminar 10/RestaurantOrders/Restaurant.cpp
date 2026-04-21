@@ -32,7 +32,7 @@ bool Restaurant::removeTable(unsigned number)
 
     tables.erase(
         std::remove_if(tables.begin(), tables.end(),
-            [&](const std::shared_ptr<Table>& table)
+            [&number](const std::shared_ptr<Table>& table)
             {
                 return table->getNumber() == number;
             }),
@@ -51,7 +51,7 @@ bool Restaurant::removeTable(unsigned number)
 std::shared_ptr<Table> Restaurant::findTable(unsigned number) const
 {
     auto it = std::find_if(tables.begin(), tables.end(),
-        [&](const std::shared_ptr<Table>& table)
+        [&number](const std::shared_ptr<Table>& table)
         {
             return table->getNumber() == number;
         });
@@ -74,14 +74,9 @@ bool Restaurant::removeDish(const std::string& name)
 {
     const auto oldSize = menu.size();
 
-    menu.erase(
-        std::remove_if(menu.begin(), menu.end(),
-            [&](const std::shared_ptr<Dish>& dish)
-            {
-                return dish->getName() == name;
-            }),
-        menu.end()
-    );
+    std::erase_if(menu, [&name](const std::shared_ptr<Dish>& dish){
+        return dish->getName() == name;
+    });
 
     if (menu.size() == oldSize)
     {
@@ -95,7 +90,7 @@ bool Restaurant::removeDish(const std::string& name)
 std::shared_ptr<Dish> Restaurant::findDish(const std::string& name) const
 {
     auto it = std::find_if(menu.begin(), menu.end(),
-        [&](const std::shared_ptr<Dish>& dish)
+        [&name](const std::shared_ptr<Dish>& dish)
         {
             return dish->getName() == name;
         });
@@ -121,7 +116,7 @@ std::shared_ptr<Order> Restaurant::createOrder(unsigned tableNumber)
 std::shared_ptr<Order> Restaurant::findOrder(unsigned orderId) const
 {
     auto it = std::find_if(orders.begin(), orders.end(),
-        [&](const std::shared_ptr<Order>& order)
+        [&orderId](const std::shared_ptr<Order>& order)
         {
             return order->getId() == orderId;
         });
@@ -165,26 +160,33 @@ std::vector<std::shared_ptr<Order>> Restaurant::getOrdersForTable(unsigned table
 {
     std::vector<std::shared_ptr<Order>> result;
 
-    std::copy_if(orders.begin(), orders.end(), std::back_inserter(result),
-        [&](const std::shared_ptr<Order>& order)
+    std::ranges::copy_if(orders, std::back_inserter(result),
+    [&tableNumber](const std::shared_ptr<Order>& order){
+        auto table = order->getTable();
+        return table && table->getNumber() == tableNumber;
+    });
+
+    // or alternatively:
+    /*
+    result.reserve(orders.size());
+    for (const auto& order : orders)
+    {
+        auto table = order->getTable();
+        if (table && table->getNumber() == tableNumber)
         {
-            auto table = order->getTable();
-            return table && table->getNumber() == tableNumber;
-        });
+            result.push_back(order);
+        }
+    }
+    */
 
     return result;
 }
 
 void Restaurant::cleanupExpiredOrders()
 {
-    orders.erase(
-        std::remove_if(orders.begin(), orders.end(),
-            [](const std::shared_ptr<Order>& order)
-            {
-                return !order->isValid();
-            }),
-        orders.end()
-    );
+    std::erase_if(orders, [](const std::shared_ptr<Order>& order){
+        return !order->isValid();
+    });
 
     for (auto& table : tables)
     {
@@ -203,11 +205,10 @@ void Restaurant::cleanupInvalidDishReferences()
 void Restaurant::removeClosedOrdersForTable(unsigned tableNumber)
 {
     std::erase_if(orders,
-                  [&](const std::shared_ptr<Order>& order)
-                  {
-                      auto table = order->getTable();
-                      return table && table->getNumber() == tableNumber && order->isClosed();
-                  });
+    [&tableNumber](const std::shared_ptr<Order>& order){
+        auto table = order->getTable();
+        return table && table->getNumber() == tableNumber && order->isClosed();
+    });
 
     for (auto& table : tables)
     {
@@ -215,13 +216,12 @@ void Restaurant::removeClosedOrdersForTable(unsigned tableNumber)
     }
 }
 
-std::size_t Restaurant::countOpenOrders() const
+size_t Restaurant::countOpenOrders() const
 {
     return std::count_if(orders.begin(), orders.end(),
-            [](const std::shared_ptr<Order>& order)
-            {
-                return !order->isClosed();
-            });
+    [](const std::shared_ptr<Order>& order){
+        return !order->isClosed();
+    });
 }
 
 void Restaurant::sortMenuByPrice()

@@ -22,7 +22,7 @@ public:
     void cleanupExpiredOrders();
 
     double getBill() const;
-    std::size_t getActiveOrdersCount() const;
+    size_t getActiveOrdersCount() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Table& table);
 };

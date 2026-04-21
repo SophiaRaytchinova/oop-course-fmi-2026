@@ -48,11 +48,35 @@ void Order::addDish(const std::shared_ptr<Dish>& dish, unsigned quantity)
 bool Order::removeOneDish(const std::string& dishName)
 {
     auto it = std::find_if(dishes.begin(), dishes.end(),
-        [&](const std::weak_ptr<Dish>& weakDish)
+        [&dishName](const std::weak_ptr<Dish>& weakDish)
         {
             auto dish = weakDish.lock();
             return dish && dish->getName() == dishName;
         });
+
+    // alternative 1:
+    /*
+    auto it = std::ranges::find_if(dishes,
+    [&dishName](const std::weak_ptr<Dish>& weakDish){
+        auto dish = weakDish.lock();
+        return dish && dish->getName() == dishName;
+    });
+    */
+
+    // alternative 2:
+    /*
+    int index = 0;
+    for (int i = 0; i < dishes.size(); i++) {
+        if (auto sp = dishes[i].lock()) {
+            if (sp->getName() == dishName) {
+                index = i;
+                break;
+            }
+        }
+    }
+
+    dishes.erase(dishes.begin() + index);
+    */
 
     if (it == dishes.end())
     {
@@ -65,11 +89,22 @@ bool Order::removeOneDish(const std::string& dishName)
 
 void Order::removeInvalidDishes()
 {
-    std::erase_if(dishes,
-                  [](const std::weak_ptr<Dish>& weakDish)
-                  {
-                      return weakDish.expired();
-                  });
+    std::erase_if(dishes, [](const std::weak_ptr<Dish>& weakDish){
+        return weakDish.expired();
+    });
+
+    // alternative:
+    /*
+    for (auto it = v.begin(); it != v.end(); ) {
+        auto sp = it->lock();
+
+        if (!sp || sp->should_be_removed()) {
+            it = v.erase(it);
+        } else {
+            ++it;
+        }
+    }
+    */
 }
 
 double Order::getTotal() const
@@ -85,6 +120,24 @@ double Order::getTotal() const
 
             return sum + dish->getPrice();
         });
+
+    // alternative:
+    /*
+    double sum = 0.0;
+
+    for (const std::weak_ptr<Dish>& weakDish : dishes)
+    {
+        auto dish = weakDish.lock();
+        if (!dish)
+        {
+            continue;
+        }
+
+        sum += dish->getPrice();
+    }
+
+    return sum;
+    */
 }
 
 std::shared_ptr<Table> Order::getTable() const
@@ -92,25 +145,36 @@ std::shared_ptr<Table> Order::getTable() const
     return table.lock();
 }
 
-std::size_t Order::getDishCount() const
+size_t Order::getDishCount() const
 {
-    return static_cast<std::size_t>(
-        std::count_if(dishes.begin(), dishes.end(),
-            [](const std::weak_ptr<Dish>& weakDish)
-            {
-                return !weakDish.expired();
-            })
-    );
+    return std::count_if(dishes.begin(), dishes.end(),
+    [](const std::weak_ptr<Dish>& weakDish){
+        return !weakDish.expired();
+    });
 }
 
 bool Order::containsDish(const std::string& dishName) const
 {
+    // here we capture dishName with the [&dishName] so that we can use a value
+    // that is not from the scope of the function
+
     return std::any_of(dishes.begin(), dishes.end(),
-        [&](const std::weak_ptr<Dish>& weakDish)
-        {
+        [&dishName](const std::weak_ptr<Dish>& weakDish){
             auto dish = weakDish.lock();
             return dish && dish->getName() == dishName;
         });
+
+    // Alternative:
+    /*
+    for (int i = 0; i < dishes.size(); i++) {
+        auto dish = dishes[i].lock();
+        if (dish && dish->getName() == dishName) {
+            return true;
+        }
+    }
+    return false;
+
+    */
 }
 
 std::ostream& operator<<(std::ostream& os, const Order& order)

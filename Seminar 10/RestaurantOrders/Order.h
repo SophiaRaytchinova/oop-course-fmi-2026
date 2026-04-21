@@ -31,7 +31,7 @@ public:
 
     double getTotal() const;
     std::shared_ptr<Table> getTable() const;
-    std::size_t getDishCount() const;
+    size_t getDishCount() const;
     bool containsDish(const std::string& dishName) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Order& order);
