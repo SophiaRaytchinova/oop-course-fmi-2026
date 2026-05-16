@@ -18,6 +18,7 @@ _Материали от семинари по ООП на групи 4 и 5, С
 **[10](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2010)** | Преговор на Rule of Zero. Подготовка преди контролно 1 
 **[11](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2011)** | Наследяване. Видове наследяване. Изключения(exceptions). Обработване на грешки и exception-и.
 **[12](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2012)** | Полиморфизъм. Статично и динамично свързване. Виртуални функции. Виртуални таблици. Абстрактни класове. Хетерогенни контейнери. Копиране на полиморфни обекти с clone
+**[13](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2013)** | Преговор на полиморфизъм, виртуални функции и полиморфни колекции. Visitor pattern
 ## 📅 График на занятията
 
 <table>
