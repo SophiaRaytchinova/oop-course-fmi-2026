@@ -19,6 +19,9 @@ _Материали от семинари по ООП на групи 4 и 5, С
 **[11](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2011)** | Наследяване. Видове наследяване. Изключения(exceptions). Обработване на грешки и exception-и.
 **[12](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2012)** | Полиморфизъм. Статично и динамично свързване. Виртуални функции. Виртуални таблици. Абстрактни класове. Хетерогенни контейнери. Копиране на полиморфни обекти с clone
 **[13](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2013)** | Преговор на полиморфизъм, виртуални функции и полиморфни колекции. Visitor pattern
+**[14](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2014)** | Factory design pattern.
+**[15](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2015)** | SOLID принципи. Множествено наследяване. Диамантен проблем. Виртуално наследяване
+
 ## 📅 График на занятията
 
 <table>
