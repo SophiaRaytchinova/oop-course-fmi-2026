@@ -8,20 +8,19 @@ bool hasSugar(const Recipe& r) {
 }
 
 int main() {
-    using enum Unit;
     Recipe pancakes("Pancakes", "Mix and fry");
-    pancakes.addIngredient(Ingredient("Flour", 200, G));
-    pancakes.addIngredient(Ingredient("Milk", 300, ML));
-    pancakes.addIngredient(Ingredient("Sugar", 20, G));
+    pancakes.addIngredient(Ingredient("Flour", 200, Unit::G));
+    pancakes.addIngredient(Ingredient("Milk", 300, Unit::ML));
+    pancakes.addIngredient(Ingredient("Sugar", 20, Unit::G));
 
     Recipe omelette("Omelette", "Beat eggs and cook");
-    omelette.addIngredient(Ingredient("Eggs", 3, PIECES));
-    omelette.addIngredient(Ingredient("Cheese", 1, G));
+    omelette.addIngredient(Ingredient("Eggs", 3, Unit::PIECES));
+    omelette.addIngredient(Ingredient("Cheese", 1, Unit::G));
 
     Recipe tunaWithPasta("Tuna fish with pasta", "");
-    tunaWithPasta.addIngredient(Ingredient("Tuna fish", 100, G));
-    tunaWithPasta.addIngredient(Ingredient("Pasta", 200, G));
-    tunaWithPasta.addIngredient(Ingredient("Mozzarella", 50, G));
+    tunaWithPasta.addIngredient(Ingredient("Tuna fish", 100, Unit::G));
+    tunaWithPasta.addIngredient(Ingredient("Pasta", 200, Unit::G));
+    tunaWithPasta.addIngredient(Ingredient("Mozzarella", 50, Unit::G));
 
     Cookbook book("My Cookbook");
 

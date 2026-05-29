@@ -7,7 +7,6 @@ enum class Unit {
 };
 
 namespace Utils {
-    using enum Unit;
     const char* convertUnitToString(Unit u);
 }
 

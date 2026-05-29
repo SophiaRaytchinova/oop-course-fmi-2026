@@ -3,12 +3,12 @@
 
 const char* Utils::convertUnitToString(Unit u) {
     switch (u) {
-        case G: return "g";
-        case MG: return "mg";
-        case L: return "l";
-        case ML: return "ml";
-        case DROPS: return "drops";
-        case PIECES: return "pieces";
+        case Unit::G: return "g";
+        case Unit::MG: return "mg";
+        case Unit::L: return "l";
+        case Unit::ML: return "ml";
+        case Unit::DROPS: return "drops";
+        case Unit::PIECES: return "pieces";
         default: return "";
     }
 }
