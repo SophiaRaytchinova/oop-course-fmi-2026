@@ -16,15 +16,14 @@ namespace {
     }
 
     const char* parseGenreToString(Genre g) {
-        using enum Genre;
         switch (g) {
-        case ACTION: return "Action";
-        case DRAMA: return "Drama";
-        case THRILLER: return "Thriller";
-        case COMEDY: return "Comedy";
-        case HORROR: return "Horror";
-        case HISTORICAL: return "Historical";
-        case SCIFI: return "Sci-Fi";
+        case Genre::ACTION: return "Action";
+        case Genre::DRAMA: return "Drama";
+        case Genre::THRILLER: return "Thriller";
+        case Genre::COMEDY: return "Comedy";
+        case Genre::HORROR: return "Horror";
+        case Genre::HISTORICAL: return "Historical";
+        case Genre::SCIFI: return "Sci-Fi";
         default: return "Other";
         }
     }

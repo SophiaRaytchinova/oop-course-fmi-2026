@@ -1,4 +1,6 @@
 #include "Screening.h"
+#include "Date.h"
+#include "Time.h"
 
 unsigned Screening::totalScreenings = 0;
 
@@ -44,8 +46,7 @@ void Screening::setBit(unsigned index, bool value) {
 Screening::Screening(const Movie* movie, const Hall* hall, const Date& date, const Time& time)
     : id(++totalScreenings), movie(movie), hall(hall), date(date), time(time) {
     unsigned seatsCount = hall->getSeatsCount();
-    bytesCount = (seatsCount + 7) / 8; // calculating the amount of bytes needed to store
-                                       // seatsCount amount of bits
+    bytesCount = (seatsCount + 7) / 8; // calculating the amount of bytes needed to store seatsCount amount of bits
     occupiedSeats = new unsigned char[bytesCount];
     for (unsigned i = 0; i < bytesCount; i++) {
         occupiedSeats[i] = 0;

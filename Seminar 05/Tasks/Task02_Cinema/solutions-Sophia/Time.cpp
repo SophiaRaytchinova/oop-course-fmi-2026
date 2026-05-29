@@ -1,5 +1,5 @@
 #include "Time.h"
-#include <print>
+#include <iomanip>
 
 void Time::recalculate() {
     hours = totalSeconds / 3600;
@@ -81,6 +81,7 @@ bool Time::setSeconds(unsigned seconds) {
 }
 
 void printTime(const Time& time, std::ostream& os) {
-    println(os, "{:02}:{:02}:{:02}",
-        time.getHours(), time.getMinutes(), time.getSeconds());
+    os << std::setfill('0') << std::setw(2) << time.getHours() << ":"
+       << std::setfill('0') << std::setw(2) << time.getMinutes() << ":"
+       << std::setfill('0') << std::setw(2) << time.getSeconds();
 }
