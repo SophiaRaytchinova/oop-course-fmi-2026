@@ -33,7 +33,7 @@ public:
 };
 
 int main() {
-    User stefo("Stefo", 21);
+    User user("testUser", 30);
     UserSerializer serializer(std::cout);
-    serializer.serialize(stefo);
+    serializer.serialize(user);
 }
