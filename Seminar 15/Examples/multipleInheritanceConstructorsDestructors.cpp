@@ -39,9 +39,9 @@ int main() {
     } // ~C() ~B() ~A()
 
     {
-        A* ptr = new C(); // A() B() C()
-        delete ptr; // ~C() ~B() ~A()
-                    // if the destructors weren't virtual, it would only call ~A()
-                    // that's why in polymorphism destructors should be virtual
-    }
+        std::unique_ptr<A> ptr = std::make_unique<C>(); // A() B() C()
+    }// ~C() ~B() ~A()
+
+    // if the destructors weren't virtual, it would only call ~A()
+    // that's why in polymorphism destructors should be virtual
 }

@@ -50,16 +50,14 @@ int main() {
     } // ~C() ~B() ~A() ~Base()
 
     {
-        Base* ptr = new C(); // Base() A() B() C()
-        delete ptr; // ~C() ~B() ~A() ~Base()
+        std::unique_ptr<Base> ptr = std::make_unique<C>(); // Base() A() B() C()
     }
-
-    // now we can also point to new C() with Base*
+    // ~C() ~B() ~A() ~Base()
 
     // virtual inheritance solves the diamond problem
     // it makes sure that only one instance of Base is created
     // and that instance is shared between A and B
-    // this way we can point to C with Base* and it will work
+    // this way we can point to C with Base ptr and it will work
     // without virtual inheritance, we would have 2x Base inside C
     // this is because virtual tells the child to call the constructor of the virtually inherited parent itself, in this case Base
     // if none is specified, the child will call the default constructor of the virtually inherited parent

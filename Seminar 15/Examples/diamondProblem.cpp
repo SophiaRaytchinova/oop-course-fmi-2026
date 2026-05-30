@@ -50,8 +50,8 @@ int main() {
     } // ~C() ~B() ~Base() ~A() ~Base()
 
     {
-        Base* ptr = new C(); // compilation error: "Cannot initialize local variable 'ptr' of type Base* with C*: base class is ambiguous or inaccessible"
-        // this happens because C has 2x Base inside it and Base* doesnt know which one to point to
+        std::unique_ptr<Base> ptr = std::make_unique<C>(); // compilation error: "Cannot initialize local variable 'ptr' of type Base* with C*: base class is ambiguous or inaccessible"
+        // this happens because C has 2x Base inside it and ptr doesnt know which one to point to
     }
 
     // as we can see the object of class C creates 2x Base objects, which is unnecessary
