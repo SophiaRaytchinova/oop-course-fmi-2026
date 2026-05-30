@@ -1,61 +1,83 @@
 #include <iostream>
+#include <memory>
 #include <string>
 
-// Abstraction
-class DatabaseConnector {
+class DBConnection {
 public:
+    virtual ~DBConnection() = default;
+
     virtual void connect() = 0;
-    virtual void query(const std::string& sql) = 0;
-    virtual ~DatabaseConnector() = default;
+    virtual void saveUser(const std::string& username) = 0;
 };
 
-// MySQL Implementation
-class MySqlDatabaseConnector : public DatabaseConnector {
+class MySQLConnection : public DBConnection {
 public:
     void connect() override {
-        std::cout << "[MySQL] Connecting to MySQL database...\n";
+        std::cout << "Connecting to MySQL...\n";
     }
 
-    void query(const std::string& sql) override {
-        std::cout << "[MySQL] Executing query: " << sql << "\n";
-    }
-};
-
-class PostgreSqlDatabaseConnector : public DatabaseConnector {
-public:
-    void connect() override {
-        std::cout << "[PostgreSQL] Connecting to PostgreSQL database...\n";
-    }
-
-    void query(const std::string& sql) override {
-        std::cout << "[PostgreSQL] Executing query: " << sql << "\n";
+    void saveUser(const std::string& username) override {
+        std::cout << "Saving user to MySQL: " << username << '\n';
     }
 };
 
-class MongoDbConnector : public DatabaseConnector {
+class PostgreSQLConnection : public DBConnection {
 public:
     void connect() override {
-        std::cout << "[MongoDB] Connecting to MongoDB database...\n";
+        std::cout << "Connecting to PostgreSQL...\n";
     }
 
-    void query(const std::string& command) override {
-        std::cout << "[MongoDB] Executing command: " << command << "\n";
+    void saveUser(const std::string& username) override {
+        std::cout << "Saving user to PostgreSQL: " << username << '\n';
+    }
+};
+
+class MongoConnection : public DBConnection {
+public:
+    void connect() override {
+        std::cout << "Connecting to MongoDB...\n";
+    }
+
+    void saveUser(const std::string& username) override {
+        std::cout << "Saving user to MongoDB: " << username << '\n';
     }
 };
 
 class UserRepository {
-public:
-    explicit UserRepository(std::shared_ptr<DatabaseConnector> connector)
-        : db(connector) {}
-
-    void fetchAllUsers() {
-        db->query("SELECT * FROM users");
-    }
-
-    void addUser(const std::string& name) {
-        db->query("INSERT INTO users (name) VALUES ('" + name + "')");
-    }
-
 private:
-    std::shared_ptr<DatabaseConnector> db;
+    std::shared_ptr<DBConnection> db;
+
+public:
+    explicit UserRepository(const std::shared_ptr<DBConnection>& db)
+        : db(db) {
+        this->db->connect();
+    }
+
+    void save(const std::string& username) {
+        db->saveUser(username);
+    }
 };
+
+int main() {
+    std::shared_ptr<DBConnection> mysql =
+        std::make_shared<MySQLConnection>();
+
+    UserRepository mysqlUsers(mysql);
+    mysqlUsers.save("test");
+
+    std::cout << "----\n";
+
+    std::shared_ptr<DBConnection> postgres =
+        std::make_shared<PostgreSQLConnection>();
+
+    UserRepository postgresUsers(postgres);
+    postgresUsers.save("abc");
+
+    std::cout << "----\n";
+
+    std::shared_ptr<DBConnection> mongo =
+        std::make_shared<MongoConnection>();
+
+    UserRepository mongoUsers(mongo);
+    mongoUsers.save("def");
+}

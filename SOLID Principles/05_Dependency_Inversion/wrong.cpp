@@ -1,30 +1,38 @@
 #include <iostream>
 #include <string>
+#include <memory>
 
-class MySqlDatabaseConnector {
+class MySQLConnection {
 public:
     void connect() {
-        std::cout << "[MySQL] Connecting to MySQL database...\n";
+        std::cout << "Connecting to MySQL...\n";
     }
 
-    void query(const std::string& sql) {
-        std::cout << "[MySQL] Executing query: " << sql << "\n";
+    void saveUser(const std::string& username) {
+        std::cout << "Saving user to MySQL: " << username << '\n';
     }
 };
 
 class UserRepository {
-public:
-    explicit UserRepository(std::shared_ptr<MySqlDatabaseConnector> connector)
-        : db(connector) {}
-
-    void fetchAllUsers() {
-        db->query("SELECT * FROM users");
-    }
-
-    void addUser(const std::string& name) {
-        db->query("INSERT INTO users (name) VALUES ('" + name + "')");
-    }
-
 private:
-    std::shared_ptr<MySqlDatabaseConnector> db;
+
+// what if we want to change to another database?
+// We would have to change the UserRepository class
+// which violates Dependency Inversion Principle
+    std::shared_ptr<MySQLConnection> db;
+
+public:
+    UserRepository(const std::shared_ptr<MySQLConnection>& db) : db(db) {
+        db->connect();
+    }
+
+    void save(const std::string& username) {
+        db->saveUser(username);
+    }
 };
+
+int main() {
+    UserRepository userRepository;
+    userRepository.save("test");
+    userRepository.save("abc");
+}
