@@ -6,17 +6,17 @@
 Един клас трябва да има само една причина да се променя.  
 Тоест, той трябва да носи една основна отговорност, а не да смесва различни роли.
 
-## O — Open/Closed Principle
+## [O — Open/Closed Principle](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/SOLID%20Principles/02_Open-Closed_Principle)
 Софтуерните компоненти трябва да са отворени за разширяване, но затворени за промяна.  
 Идеята е ново поведение да се добавя чрез нов код, без да се чупи или променя вече работещият.
 
-## L — Liskov Substitution Principle
+## [L — Liskov Substitution Principle](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/SOLID%20Principles/03_Liskov_Substitution)
 Обект от наследник трябва да може да замества обект от базовия клас, без това да нарушава коректността на програмата.  
 С други думи, наследяването не трябва да променя очакваното поведение по невалиден начин.
 
-## I — Interface Segregation Principle
+## [I — Interface Segregation Principle](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/SOLID%20Principles/04_Interface_Segregation)
 По-добре е да имаме няколко малки и конкретни интерфейса, отколкото един голям общ интерфейс.  
 Класовете не трябва да бъдат принуждавани да имплементират методи, които не използват.
 
-## D — Dependency Inversion Principle
+## [D — Dependency Inversion Principle](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/SOLID%20Principles/05_Dependency_Inversion)
 Модулите от високо ниво не трябва да зависят от модули от ниско ниво; и едните, и другите трябва да зависят от абстракции.
