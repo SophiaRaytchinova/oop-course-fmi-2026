@@ -43,10 +43,10 @@ int main() {
 
     std::cout << "\nStack<std::string, 4>:\n";
     Stack<std::string, 4> words;
-    words.push("stefcho");
-    words.push("se");
+    words.push("lorem");
+    words.push("ipsum");
 
-    std::string s = "zabavlqva";
+    std::string s = "dolor";
     words.push(std::move(s));
 
     std::cout << "Top: " << words.peek() << '\n';

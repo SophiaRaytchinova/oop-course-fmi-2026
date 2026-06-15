@@ -9,7 +9,7 @@ int main() {
     // Конструиране
     string s1;                      // empty string
     string s2 = "Hello";            // from C-string
-    string s3("Stefo");             // constructor
+    string s3("Abc");             // constructor
     string s4(5, '*');              // "*****"
     string s5 = s2 + " " + s3;      // concatenation
 

@@ -9,5 +9,5 @@ int main() {
     X obj;
     std::cout << obj.x; // semantic error, trying to access a private member
 
-    int num = "stefo"; // semantic error, assigning string to int
+    int num = "abc"; // semantic error, assigning string to int
 }

@@ -61,8 +61,8 @@ int main() {
     seminar.removeRegistration(3);
     printEvent(seminar);
 
-    std::cout << "Register stefo on seat 15:\n";
-    std::cout << seminar.registerUserAtSeat(new User("Stefo", "stf@test.cx", 22, 80.0), 15, true) << '\n';
+    std::cout << "Register on seat 15:\n";
+    std::cout << seminar.registerUserAtSeat(new User("John Doe", "test@test.cx", 22, 80.0), 15, true) << '\n';
     printEvent(seminar);
 
     ProfitCalculator profitCalculator = ProfitCalculator::builder()

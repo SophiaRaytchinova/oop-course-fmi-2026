@@ -2,6 +2,6 @@
 #include "Person.h"
 
 int main() {
-    Person stefcho("Stefcho", 22);
-    print(stefcho);
+    Person p("John", 22);
+    print(p);
 }

@@ -8,6 +8,9 @@ using std::cout;
 using std::endl;
 
 int main() {
+	// if we have an ignore.txt file with the following content:
+	// abc
+	// d e f
 	std::ifstream ifs("ignore.txt");
 	if (!ifs.is_open()) {
 		std::cerr << "Failed to open file!";
@@ -16,13 +19,13 @@ int main() {
 
 	char buff[MAX_BUFF_SIZE];
 	ifs >> buff; // formatted input will read until the first whitespace, which in this case is '\n'
-	cout << buff << endl; // this will print: stefoto
+	cout << buff << endl; // this will print: abc
 	
 	ifs.ignore(); // try to run the code with this line and without this line, to see the difference!
 	
 	ifs.getline(buff, MAX_BUFF_SIZE); // 
 	cout << buff << endl; // If we use ifs.ignore() it will move the get pointer after '\n'
-						  // and it will print : "e momche za vsichko".
+						  // and it will print : "d e f".
 						  // If we don't it will print an empty string, because the get pointer will be at \n
 						  // and it will try to perform getline on '\n', which will result in an empty string
 }

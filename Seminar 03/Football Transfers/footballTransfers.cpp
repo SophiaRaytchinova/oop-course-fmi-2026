@@ -201,34 +201,34 @@ int main() {
     FootballClub realMadrid("Real Madrid", 400000000.00);
     FootballClub manUnited("Manchester United", 340000000.00);
     FootballClub milan("Milan", 190000000.00);
-    FootballClub banishoraFc("Banishora FC", 20.00);
+    FootballClub psg("Paris Saint-Germain", 400000000.00);
 
     println("Teams are created first");
     realMadrid.print();
     manUnited.print();
     milan.print();
-    banishoraFc.print();
+    psg.print();
 
     println();
     println("Players exist in an inner scope");
     {
-        FootballPlayer mbappe("Kylian Mbappe", 26, 9, 200000000.00, &realMadrid);
+        FootballPlayer mbappe("Kylian Mbappe", 26, 9, 200000000.00, &psg);
         FootballPlayer bruno("Bruno Fernandes", 30, 8, 110000000.00, &manUnited);
         FootballPlayer leao("Rafael Leao", 25, 10, 90000000.00, &milan);
-        FootballPlayer stefo("Stefan Shivarov Jr", 22, 24, 5.00, &manUnited);
+        FootballPlayer vitinha("Vitinha", 40, 8, 120000000.00, &psg);
 
         mbappe.print();
         bruno.print();
         leao.print();
-        stefo.print();
+        vitinha.print();
 
         println();
 
-        banishoraFc.buyPlayer(stefo); // transfer
-        stefo.print();
+        realMadrid.buyPlayer(mbappe); // transfer
+        mbappe.print();
 
         realMadrid.print();
-        banishoraFc.print();
+        psg.print();
     } // the players are destroyed here, after that they no longer exist
 
     println();
@@ -236,13 +236,13 @@ int main() {
     realMadrid.print();
     manUnited.print();
     milan.print();
-    banishoraFc.print();
+    psg.print();
 
     // the next few lines showcase a problem with copying/assignment of objects with dynamic memory
     println();
     println("Broken copying/assignment example");
 
-    FootballPlayer player("Stefo", 35, 7, 4.50, &banishoraFc);
+    FootballPlayer player("test", 35, 7, 4.50, &psg);
     {
         // FootballPlayer emptyPlayer = player; // need to implement copy constructor for this to work properly
         FootballPlayer emptyPlayer;

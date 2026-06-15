@@ -142,8 +142,8 @@ void printShipment(const Shipment& shipment, ostream& os = cout) {
 }
 
 int main() {
-    Person stefo("Stefo", 35);
-    Person serhan("Serhan", 28);
-    Shipment shipment("Burkani s lyutenitsa", 12.50, &stefo, &serhan);
+    Person p1("John Doe", 35);
+    Person p2("Jane Doe", 28);
+    Shipment shipment("Package", 12.50, &p1, &p2);
     printShipment(shipment);
 }

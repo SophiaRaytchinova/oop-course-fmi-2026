@@ -142,7 +142,7 @@ PriorityQueue<std::string, LongerStringFirst> pq;
 и добавим:
 
 ```cpp
-"stefo", "manchester", "united"
+"champions", "manchester", "united"
 ```
 
 тогава `peek()` трябва да върне стринга с максимална дължина.

@@ -54,7 +54,7 @@ int main() {
     Person p1;
     cout << p1.getName() << ' ' << p1.getAge() << endl;
 
-    Person p2("Stefo", 22);
+    Person p2("John Doe", 22);
     cout << p2.getName() << ' ' << p2.getAge() << endl;
 
     // dynamically allocated memory is handled by the constructor and destructor

@@ -23,7 +23,7 @@
 Имаме **създаване на нов обект**.
 
 ```cpp
-Person p1("Stefo");
+Person p1("John");
 Person p2(p1);      // copy constructor
 Person p3 = p1;     // пак copy constructor
 ```
@@ -37,7 +37,7 @@ Person p3 = p1;     // пак copy constructor
 Имаме **вече съществуващ обект**, който променяме.
 
 ```cpp
-Person p1("Stefo");
+Person p1("John");
 Person p2; // default constructor
 
 p2 = p1;   // operator=
@@ -109,7 +109,7 @@ int main() {
 
 #### 1. При инициализация с друг обект
 ```cpp
-Person p1("Stefo");
+Person p1("John");
 Person p2(p1);
 Person p3 = p1;
 ```
@@ -118,7 +118,7 @@ Person p3 = p1;
 ```cpp
 void printPerson(Person p) { ... }
 
-Person p("Stefo");
+Person p("John");
 printPerson(p);   // p се създава като копие
 ```
 
@@ -129,7 +129,7 @@ printPerson(p);   // p се създава като копие
 Оператор= се извиква, когато имаме **два вече съществуващи обекта** и искаме единият да стане копие на другия.
 
 ```cpp
-Person a("Stefo");
+Person a("John");
 Person b; // default constructor
 
 b = a;  // operator=
@@ -215,7 +215,7 @@ struct Person {
 
 ```cpp
 int main() {
-    Person p1("Stefo", 22);
+    Person p1("John", 22);
     Person p2 = p1;   // compiler-generated copy constructor
 
 } // и p1, и p2 ще извикат delete[] върху един и същи name
@@ -375,8 +375,8 @@ struct Person {
 За да защитим случая на **self-assignment**:
 
 ```cpp
-Person stefcho("Stefcho", 22);
-stefcho = stefcho;
+Person p("John", 22);
+p = p;
 ```
 
 Без тази проверка ще:

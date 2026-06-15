@@ -1,7 +1,5 @@
 # 🍎 Calorie Tracker 🍰
 
-_Стефчо решил, че ще си възвърне формата от славните си години. Спрял захарта, почнал да тренира здраво и установил, че трябва да си записва какви храни приема през деня..._
-
 Да се реализира малка програма, която следи приетите калории за някой ден **(дата)** и може да запише дневен отчет в текстов файл.
 
 ---
@@ -56,8 +54,8 @@ Personal metrics:
   Activity level: 1
   Goal kcal: 2162
 Meals:
-  - name: mazilka, 290 kcal
-  - name: tortichka, 750 kcal
+  - name: yoghurt, 290 kcal
+  - name: cake, 750 kcal
   - name: chicken breast, 430 kcal
 Balance: 1470 / 2162
 Over goal: no

@@ -343,12 +343,12 @@ int main() {
     }
 
     MealEntry m1;
-    m1.setName("mazilka");
+    m1.setName("yoghurt");
     m1.setCalories(290);
     t.addMeal(m1);
 
     MealEntry m2;
-    m2.setName("tortichka");
+    m2.setName("cake");
     m2.setCalories(750);
     t.addMeal(m2);
 

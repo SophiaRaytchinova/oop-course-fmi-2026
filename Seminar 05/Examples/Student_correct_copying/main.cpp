@@ -2,17 +2,17 @@
 
 int main() {
     //...
-    Student stefo("Stefo");
-    stefo.addGrade(5.50);
-    stefo.addGrade(6.00);
-    stefo.addGrade(3.25);
-    printStudent(stefo);
+    Student s("John Doe");
+    s.addGrade(5.50);
+    s.addGrade(6.00);
+    s.addGrade(3.25);
+    printStudent(s);
 
     {
-        Student stefoCopy = stefo;
-        stefoCopy.addGrade(6.00);
-        printStudent(stefoCopy);
+        Student copy = s;
+        copy.addGrade(6.00);
+        printStudent(copy);
     }
 
-    printStudent(stefo);
+    printStudent(s);
 }
