@@ -21,3 +21,4 @@ _Материали от семинари по ООП на групи 4 и 5, С
 **[13](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2013)** | Преговор на полиморфизъм, виртуални функции и полиморфни колекции. Visitor pattern
 **[14](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2014)** | Factory design pattern.
 **[15](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2015)** | SOLID принципи. Множествено наследяване. Диамантен проблем. Виртуално наследяване
+**[16](https://github.com/StefanShivarov/oop-course-fmi-2026/tree/main/Seminar%2016)** | Преговор. Command pattern
